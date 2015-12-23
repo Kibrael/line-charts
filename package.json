@@ -1,0 +1,25 @@
+{
+  "name": "line-charts",
+  "version": "0.0.0",
+  "description": "Demo showing ability to quickly generate line charts.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awolfe76/line-charts.git"
+  },
+  "keywords": [
+    "c3",
+    "d3",
+    "chart",
+    "line"
+  ],
+  "author": "Andrew Wolfe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/awolfe76/line-charts/issues"
+  },
+  "homepage": "https://github.com/awolfe76/line-charts#readme"
+}
