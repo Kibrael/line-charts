@@ -1,0 +1,138 @@
+button,
+button::after,
+button::before,
+.btn,
+.btn::after,
+.btn::before {
+  box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.btn {
+  border: 0;
+  border-radius: (4/$font-size)*1em;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "AvenirNextLTW01-Medium", Arial, sans-serif;
+  font-size: 1em;
+  line-height: normal;
+  margin: 0;
+  padding: ($btn-padding/$font-size)*1em (14/$font-size)*1em;
+  text-decoration: none;
+  transition: background-color .1s;
+  vertical-align: middle;
+  -webkit-appearance: none;
+
+  &,
+  &:link,
+  &:visited {
+    background-color: $pacific;
+    color: $white;
+  }
+
+  &:hover,
+  &.hover {
+    background-color: darken($pacific, 10%);
+  }
+
+  &:focus,
+  &.focus {
+    background-color: darken($pacific, 10%);
+    outline: 1px dotted $pacific;
+    // outline-offset is not supported everywhere but it adds a nice touch
+    // in browsers where it is.
+    outline-offset: 1px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($pacific, 15%);
+  }
+
+  button&::-moz-focus-inner,
+  input&::-moz-focus-inner {
+    // Fixes inconsistent button.btn height in FireFox
+    // Helps with inconsistent input.btn height in FireFox but not completely
+    border: 0;
+  }
+
+  & + & {
+    margin-left: (6/$font-size)*1em;
+  }
+}
+
+.btn-secondary {
+  &,
+  &:link,
+  &:visited {
+    background-color: $gray;
+    color: $white;
+  }
+
+  &:hover,
+  &.hover {
+    background: darken($gray, 10%);
+  }
+
+  &:focus,
+  &.focus {
+    background-color: darken($gray, 10%);
+    outline: 1px dotted $gray;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($gray, 15%);
+  }
+}
+
+.btn-warning {
+  &,
+  &:link,
+  &:visited {
+    background-color: $redorange;
+    color: $white;
+  }
+
+  &:hover,
+  &.hover {
+    background: darken($redorange, 10%);
+  }
+
+  &:focus,
+  &.focus {
+    background-color: darken($redorange, 10%);
+    outline: 1px dotted $redorange;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($redorange, 15%);
+  }
+}
+
+.btn-disabled {
+  &,
+  &:link,
+  &:visited {
+    background-color: $gray-20;
+    color: $gray;
+  }
+
+  &:hover,
+  &.hover {
+    background: $gray-20;
+  }
+
+  &:focus,
+  &.focus {
+    background-color: $gray-20;
+    outline: 1px dotted $gray-20;
+  }
+
+  &:active,
+  &.active {
+    background-color: $gray-20;
+  }
+}

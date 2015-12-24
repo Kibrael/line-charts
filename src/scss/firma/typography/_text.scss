@@ -1,0 +1,23 @@
+body {
+  color: $black;
+  font-family: $serif-stack;
+  font-size: 100%;
+  line-height: $line-height/$font-size;
+}
+
+.sans {
+  font-family: "AvenirNextLTW01-Regular", Arial, sans-serif;
+}
+
+strong {
+  font-family: "AvenirNextLTW01-Demi", Arial, sans-serif;
+}
+
+em {
+  font-family: "AvenirNextLTW01-Italic", Arial, sans-serif;
+}
+
+.lead {
+  font-size: ($h3-font-size/$font-size)*1em;
+  margin-top: (30/$font-size)*1em;
+}

@@ -1,0 +1,39 @@
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+select[multiple],
+textarea {
+  background-color: $white;
+  border: 1px solid $gray;
+  font-size: 1em;
+  margin: 0;
+  padding: .5em;
+  vertical-align: middle;
+  &.error {
+    border: 1px solid $redorange;
+    outline: 1px solid $redorange;
+  }
+  &.warning {
+    border: 1px solid $gold;
+    outline: 1px solid $gold;
+  }
+  &.success {
+    border: 1px solid $green;
+    outline: 1px solid $green;
+  }
+  &.disabled,
+  &[disabled] {
+    background-color: $gray-50;
+    border: 1px solid $gray-50;
+    outline: 1px solid $gray;
+  }
+  &:focus {
+    border: 1px solid $pacific;
+    box-shadow: none;
+    outline: 1px solid $pacific;
+    outline-offset: 0;
+  }
+}

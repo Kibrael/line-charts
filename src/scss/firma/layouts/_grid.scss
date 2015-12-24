@@ -1,0 +1,57 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: $max-width * 1px;
+}
+.group:before,
+.group:after {
+  content: " ";
+  display: table
+}
+.group:after {
+    clear: both;
+}
+.col {
+  float: left;
+}
+// small first, default
+@for $i from 1 to $columns + 1 {
+  .#{$column-prefix}-#{$i} {
+    width: percentage($i/$columns);
+  }
+}
+@media only screen
+and (min-width: $med-min * 1px)
+and (max-width: $large-min * 1px) {
+    @for $i from 1 to $columns-med + 1 {
+      .#{$column-med-prefix}-#{$i} {
+        width: percentage($i/$columns-med);
+      }
+    }
+}
+
+@media only screen
+and (min-width: $large-min * 1px)
+and (max-width: $x-large-min * 1px) {
+    @for $i from 1 to $columns-large + 1 {
+      .#{$column-large-prefix}-#{$i} {
+        width: percentage($i/$columns-large);
+      }
+    }
+}
+
+@media only screen
+and (min-width: $x-large-min * 1px) {
+    @for $i from 1 to $columns-x-large + 1 {
+      .#{$column-x-large-prefix}-#{$i} {
+        width: percentage($i/$columns-x-large);
+      }
+    }
+}

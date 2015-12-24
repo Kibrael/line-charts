@@ -1,0 +1,44 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "AvenirNextLTW01-Regular", Arial, sans-serif;
+  margin-top: 0;
+  margin-bottom: (15/$font-size)*1em;
+  width: 100%;
+  max-width: 100%;
+}
+
+th,
+td {
+  padding: (10/$font-size)*1em;
+
+  thead & {
+    background: $gray-10;
+    color: $black;
+    font-family: "AvenirNextLTW01-Demi", Arial, sans-serif;
+    font-size: ($h5-font-size/$font-size)*1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+thead,
+tbody tr {
+  border-bottom: 1px solid #5b616b;
+}
+
+th {
+  border-bottom: 3px solid $gray-50;
+  font-family: "AvenirNextLTW01-Demi", Arial, sans-serif;
+  text-align: left;
+}
+td {
+    border-bottom: 1px solid $gray-50;
+}
+.no-border td {
+    border-bottom-width: 0;
+}
+
+tbody th {
+  font-family: "AvenirNextLTW01-Demi", Arial, sans-serif;
+}
