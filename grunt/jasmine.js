@@ -3,5 +3,6 @@ module.exports = {
     src : [],
     options : {
       specs : 'test/specs.js'
+    }
   }
 }
