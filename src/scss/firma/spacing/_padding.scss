@@ -1,0 +1,29 @@
+@for $i from 0 to $spacing-options + 1 {
+  .padding-#{$i} {
+    padding: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .padding-top-#{$i} {
+    padding-top: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .padding-right-#{$i} {
+    padding-right: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .padding-bottom-#{$i} {
+    padding-bottom: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .padding-left-#{$i} {
+    padding-left: ($i*$spacing)/$font-size*1em;
+  }
+}

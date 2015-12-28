@@ -1,0 +1,34 @@
+.margin-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .margin-#{$i} {
+    margin: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .margin-top-#{$i} {
+    margin-top: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .margin-right-#{$i} {
+    margin-right: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .margin-bottom-#{$i} {
+    margin-bottom: ($i*$spacing)/$font-size*1em;
+  }
+}
+
+@for $i from 0 to $spacing-options + 1 {
+  .margin-left-#{$i} {
+    margin-left: ($i*$spacing)/$font-size*1em;
+  }
+}

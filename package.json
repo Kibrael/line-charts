@@ -38,5 +38,8 @@
     "load-grunt-config": "^0.19.1",
     "node-sass": "^3.4.2",
     "sammy": "^0.7.6"
+  },
+  "dependencies": {
+    "normalize.css": "^3.0.3"
   }
 }

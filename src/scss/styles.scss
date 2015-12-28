@@ -1,7 +1,10 @@
-@import 'firma/config/config';
+@import 'node_modules/normalize.css/normalize.css';
 
-@import 'cfpb/config/config';
 @import 'cfpb/config/colors';
+
+@import 'firma/config/config';
+@import 'cfpb/config/config';
+
 @import 'cfpb/config/fonts';
 
 @import 'firma/layouts/grid';
@@ -11,3 +14,12 @@
 @import 'firma/forms/inputs';
 @import 'firma/buttons';
 @import 'firma/tables';
+
+@import 'firma/spacing/padding';
+@import 'firma/spacing/margin';
+
+@import 'firma/positions';
+
+@import 'firma/borders';
+
+@import 'firma/alignments';
