@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "c3": "^0.4.10",
+    "director": "^1.2.8",
     "normalize.css": "^3.0.3"
   }
 }
