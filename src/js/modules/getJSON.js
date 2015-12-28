@@ -1,24 +1,8 @@
-var Ajax = require('simple-ajax');
+var request = require('superagent');
 
-function getJSON(path) {
-  var ajax = new Ajax({
-    url: path,
-    method: 'GET'
-  });
-
-  ajax.on('success', function(event) {
-    console.log('success', event);
-    return event;
-  });
-
-  ajax.on('error', function(event) {
-    console.log('error', event);
-    return event;
-  });
-
-  ajax.on('complete', function(event) {
-    console.log('complete', event);
-    return event;
+function getJSON(path, cb) {
+  request.get(path, function(err, res) {
+    cb(res.text);
   });
 }
 
