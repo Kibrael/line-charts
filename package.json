@@ -40,6 +40,7 @@
     "sammy": "^0.7.6"
   },
   "dependencies": {
+    "c3": "^0.4.10",
     "normalize.css": "^3.0.3"
   }
 }
