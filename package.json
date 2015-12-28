@@ -42,6 +42,7 @@
   "dependencies": {
     "c3": "^0.4.10",
     "director": "^1.2.8",
-    "normalize.css": "^3.0.3"
+    "normalize.css": "^3.0.3",
+    "simple-ajax": "^2.3.1"
   }
 }

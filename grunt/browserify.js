@@ -9,4 +9,4 @@ module.exports = {
       'test/specs.js': ['test/*Spec.js']
     }
   }
-};
+}

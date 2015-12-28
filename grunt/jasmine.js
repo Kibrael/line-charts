@@ -4,4 +4,4 @@ module.exports = {
     options : {
       specs : 'test/specs.js'
   }
-};
+}
