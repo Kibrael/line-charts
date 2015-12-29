@@ -4,6 +4,7 @@
     "description": "Bank data",
     "layout": "bank-data",
     "categories": "chart",
+    "type": "line",
     "data": {
         "years": [
             {

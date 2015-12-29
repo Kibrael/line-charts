@@ -3,6 +3,7 @@ module.exports = {
     'sass:dev',
     'browserify:dev',
     'browserify:specs',
+    'jasmine:dev',
     'copy:dev',
     'connect:livereload',
     'watch'
