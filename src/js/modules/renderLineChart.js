@@ -9,6 +9,13 @@ function setYLabel(key) {
   return label;
 }
 
+function setColors(value) {
+  var colors = {};
+  colors[value] = '#2CB34A';
+
+  return colors;
+}
+
 function renderChart(json, value) {
   value = typeof value !== 'undefined' ? value : 'count';
 
@@ -17,9 +24,7 @@ function renderChart(json, value) {
     data: {
       type: json.type,
       json: json.data.years,
-      colors: {
-        count: '#2CB34A'
-      },
+      colors: setColors(value),
       keys: {
         x: 'year',
         value: [value]

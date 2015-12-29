@@ -12,8 +12,19 @@
 <body>
   <div class="container">
     <div class="group">
-      <div class="col-2">
+      <div class="col col-1">
+        <h3>Choose a bank</h3>
+        <input id="bank-name" name="bank-name" type="text" />
+        <h3>Choose a type of loan</h3>
+        <input id="bank-state" name="bank-state" type="text" />
+        <h3>Choose a location</h3>
+        <input id="bank-state" name="bank-state" type="text" />
+      </div>
+      <div class="col col-1">
         <div id="chart"></div>
+        <div class="text-align-center">
+          Toggle between: <a class="js-toggle" data-data="count" href="#">Count</a> and <a class="js-toggle" data-data="loan_amount" href="#">Loan Amount</a>
+        </div>
       </div>
     </div>
   </div>
