@@ -35,6 +35,8 @@
     "grunt-sass": "^1.1.0",
     "jasmine": "^2.4.1",
     "jasmine-ajax": "^3.2.0",
+    "jasmine-jquery": "^2.1.1",
+    "jquery": "^2.1.4",
     "load-grunt-config": "^0.19.1",
     "node-sass": "^3.4.2"
   },
@@ -43,5 +45,15 @@
     "director": "^1.2.8",
     "normalize.css": "^3.0.3",
     "superagent": "^1.6.1"
+  },
+  "browser": {
+    "jasmine-jquery": "./node_modules/jasmine-jquery/lib/jasmine-jquery.js"
+  },
+  "browserify-shim": {
+    "jasmine-jquery": {
+      "depends": [
+        "jquery:jQuery"
+      ]
+    }
   }
 }

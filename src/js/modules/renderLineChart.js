@@ -1,5 +1,14 @@
 var c3 = require('c3');
 
+function setYLabel(key) {
+  var label = 'Count';
+  if (key === 'loan_amount') {
+    label = 'Loan Amount';
+  }
+
+  return label;
+}
+
 function renderChart(json, value) {
   value = typeof value !== 'undefined' ? value : 'count';
 
@@ -26,7 +35,7 @@ function renderChart(json, value) {
       y: {
         label: {
           position: 'outer-middle',
-          text: value
+          text: setYLabel(value)
         }
       }
     },
