@@ -2,6 +2,7 @@ var get = require ('./modules/getJSON');
 var check = require ('./modules/checkStatusCode');
 var line = require('./modules/renderLineChart');
 var toggle = require('./modules/toggleChart');
+require('awesomplete');
 
 get('data/bank/type/state/data.json', testing);
 

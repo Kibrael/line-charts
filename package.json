@@ -41,6 +41,7 @@
     "node-sass": "^3.4.2"
   },
   "dependencies": {
+    "awesomplete": "git+https://github.com/LeaVerou/awesomplete.git#gh-pages",
     "c3": "^0.4.10",
     "director": "^1.2.8",
     "normalize.css": "^3.0.3",

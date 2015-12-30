@@ -38,7 +38,9 @@ describe('toggling a chart', function() {
     var spyEvent = spyOnEvent(tCount, 'click');
     var evObj = document.createEvent('Events');
     evObj.initEvent('click', true, false);
+    
     tCount.dispatchEvent(evObj);
+
     expect('click').toHaveBeenTriggeredOn(tCount)
     expect(spyEvent).toHaveBeenTriggered();
     expect(document.getElementById('chart')).not.toBeEmpty();
