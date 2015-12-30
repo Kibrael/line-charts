@@ -24,5 +24,9 @@ module.exports = {
     specs: {
       files: 'test/*Spec.js',
       tasks: ['browserify:specs', 'jasmine:dev']
+    },
+    json: {
+      files: 'src/data/**/*.json',
+      tasks: ['copy:dev']
     }
 }

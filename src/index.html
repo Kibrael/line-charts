@@ -13,14 +13,97 @@
   <div class="container">
     <div class="group">
       <div class="col col-1">
-        <h3>Choose a bank</h3>
-        <input class="awesomplete" data-list="One, OneMore, Two, Twoisgreat" id="bank-name" name="bank-name" type="text" />
-        <h3>Choose a type of loan</h3>
-        <input id="bank-state" name="bank-state" type="text" />
-        <h3>Choose a location</h3>
-        <input id="bank-state" name="bank-state" type="text" />
+        <div class="table">
+          <div class="table-cell padding-8" id="container-bank-name">
+            <div>
+              <h3>First, choose a bank</h3>
+              <input id="bank-name" name="bank-name" type="text" />
+            </div>
+            <div class="visually-hidden padding-top-8" id="container-loan-type">
+              <h3>Now, choose a type of loan</h3>
+              <select id="loan-type" name="loan-type">
+                <option>
+                  Choose a type
+                </option>
+                <option>
+                  Single Family Originations
+                </option>
+                <option>
+                  Denials
+                </option>
+                <option>
+                  Sales
+                </option>
+                <option>
+                  Refinances
+                </option>
+              </select>
+            </div>
+            <div class="visually-hidden padding-top-8" id="container-bank-location">
+              <h3>Finally, choose a location</h3>
+              <select id="bank-location">
+                <option>Choose a state</option>
+              	<option value="AL">Alabama</option>
+              	<option value="AK">Alaska</option>
+              	<option value="AZ">Arizona</option>
+              	<option value="AR">Arkansas</option>
+              	<option value="CA">California</option>
+              	<option value="CO">Colorado</option>
+              	<option value="CT">Connecticut</option>
+              	<option value="DE">Delaware</option>
+              	<option value="DC">District Of Columbia</option>
+              	<option value="FL">Florida</option>
+              	<option value="GA">Georgia</option>
+              	<option value="HI">Hawaii</option>
+              	<option value="ID">Idaho</option>
+              	<option value="IL">Illinois</option>
+              	<option value="IN">Indiana</option>
+              	<option value="IA">Iowa</option>
+              	<option value="KS">Kansas</option>
+              	<option value="KY">Kentucky</option>
+              	<option value="LA">Louisiana</option>
+              	<option value="ME">Maine</option>
+              	<option value="MD">Maryland</option>
+              	<option value="MA">Massachusetts</option>
+              	<option value="MI">Michigan</option>
+              	<option value="MN">Minnesota</option>
+              	<option value="MS">Mississippi</option>
+              	<option value="MO">Missouri</option>
+              	<option value="MT">Montana</option>
+              	<option value="NE">Nebraska</option>
+              	<option value="NV">Nevada</option>
+              	<option value="NH">New Hampshire</option>
+              	<option value="NJ">New Jersey</option>
+              	<option value="NM">New Mexico</option>
+              	<option value="NY">New York</option>
+              	<option value="NC">North Carolina</option>
+              	<option value="ND">North Dakota</option>
+              	<option value="OH">Ohio</option>
+              	<option value="OK">Oklahoma</option>
+              	<option value="OR">Oregon</option>
+              	<option value="PA">Pennsylvania</option>
+              	<option value="RI">Rhode Island</option>
+              	<option value="SC">South Carolina</option>
+              	<option value="SD">South Dakota</option>
+              	<option value="TN">Tennessee</option>
+              	<option value="TX">Texas</option>
+              	<option value="UT">Utah</option>
+              	<option value="VT">Vermont</option>
+              	<option value="VA">Virginia</option>
+              	<option value="WA">Washington</option>
+              	<option value="WV">West Virginia</option>
+              	<option value="WI">Wisconsin</option>
+              	<option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col col-1">
+        <hgroup class="padding-top-8">
+          <h3 id="chart-title"></h3>
+          <h4 id="chart-desc"></h4>
+        </hgroup>
         <div id="chart"></div>
         <div class="text-align-center">
           Toggle between: <a class="js-toggle" data-data="count" href="#" id="toggle-count">Count</a> and <a class="js-toggle" data-data="loan_amount" href="#" id="toggle-loan-amount">Loan Amount</a>
