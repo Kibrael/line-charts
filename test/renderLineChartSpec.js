@@ -1,6 +1,5 @@
 require('jasmine-jquery');
 var line = require ('../src/js/modules/renderLineChart');
-var $ = require('jquery');
 
 var json = {
   title: "Bank HMDA filings",
@@ -34,13 +33,13 @@ describe('rendering a chart', function() {
   });
   it('should render a chart (with default)', function() {
     line(json);
-    expect($('#chart')).not.toBeEmpty();
-    expect($('.c3-axis-y-label')).toHaveText('Count');
+    expect(document.getElementById('chart')).not.toBeEmpty();
+    expect(document.querySelector('.c3-axis-y-label')).toHaveText('Count');
   });
 
   it('should render a chart', function() {
     line(json, 'loan_amount');
-    expect($('#chart')).not.toBeEmpty();
-    expect($('.c3-axis-y-label')).toHaveText('Loan Amount');
+    expect(document.getElementById('chart')).not.toBeEmpty();
+    expect(document.querySelector('.c3-axis-y-label')).toHaveText('Loan Amount');
   });
 });
