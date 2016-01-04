@@ -1,4 +1,4 @@
-function addClass(element, cssClass) {
+function addClass(cssClass, element) {
   element.classList.add(cssClass);
 }
 

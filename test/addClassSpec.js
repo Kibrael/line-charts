@@ -6,7 +6,7 @@ describe('adding a class', function() {
     setFixtures('<div class="toggle"></div>');
   });
   it('should add a class to .toggle', function() {
-    addClass(document.querySelector('.toggle'), 'active');
+    addClass('active', document.querySelector('.toggle'));
     expect(document.querySelector('.toggle')).toHaveClass('active');
   });
 });

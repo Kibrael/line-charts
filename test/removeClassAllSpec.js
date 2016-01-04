@@ -6,7 +6,7 @@ describe('removing a class from all', function() {
 
   beforeEach(function() {
     setFixtures('<div class="toggle active"></div><div class="toggle active"></div>');
-    remove('.toggle', 'active');
+    remove('active', '.toggle');
     toggles = document.querySelectorAll('.toggle');
   });
   it('should not have class .active', function() {

@@ -1,5 +1,5 @@
-function removeClass(cssClass, elementId) {
-  document.getElementById(elementId).classList.remove(cssClass);
+function removeClass(cssClass, element) {
+  element.classList.remove(cssClass);
 }
 
 module.exports = removeClass;

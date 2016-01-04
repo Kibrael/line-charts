@@ -30,6 +30,7 @@ describe('toggling a chart', function() {
   beforeEach(function() {
     setFixtures('<div id="chart"></div><a class="js-toggle" data-data="count" href="#" id="toggle-count">Count</a> and <a class="js-toggle" data-data="loan_amount" href="#" id="toggle-loan-amount">Loan Amount</a>');
   });
+  
   it('should render a chart (with default of count)', function() {
     var tCount = document.getElementById('toggle-count');
     tCount.addEventListener('click', function() {
@@ -38,7 +39,7 @@ describe('toggling a chart', function() {
     var spyEvent = spyOnEvent(tCount, 'click');
     var evObj = document.createEvent('Events');
     evObj.initEvent('click', true, false);
-    
+
     tCount.dispatchEvent(evObj);
 
     expect('click').toHaveBeenTriggeredOn(tCount)

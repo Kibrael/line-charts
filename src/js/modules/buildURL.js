@@ -1,7 +1,3 @@
-var inputBank = document.getElementById('bank-name');
-var inputType = document.getElementById('loan-type');
-var inputLocation = document.getElementById('bank-location');
-
 function replaceSpace(string) {
   return string.replace(/ /g, '-');
 }
@@ -10,16 +6,19 @@ function toLower(string) {
   return string.toLowerCase();
 }
 
-function buildURL() {
-  var bankName = inputBank.value;
-  var loanType = inputType.value;
-  var bankLocation = inputLocation.value;
+function buildURL(pathParts) {
+  var path = 'data/';
+  for (var i = 0; i < pathParts.length; i++) {
+    if (i === 2) {
+      if (toLower(pathParts[i]) !== 'nationwide') {
+        path = path + 'statewide/';
+      }
+    }
+    path = path + toLower(replaceSpace(pathParts[i])) + '/';
+  }
+  path = path + 'data.json';
 
-  return 'data/'
-    + toLower(replaceSpace(bankName))
-    + '/' + toLower(replaceSpace(loanType))
-    + '/' + toLower(replaceSpace(bankLocation))
-    + '/data.json';
+  return path;
 }
 
 module.exports = buildURL;
