@@ -44,6 +44,7 @@
     "awesomplete": "git+https://github.com/LeaVerou/awesomplete.git#gh-pages",
     "c3": "^0.4.10",
     "director": "^1.2.8",
+    "grapnel": "^0.6.3",
     "normalize.css": "^3.0.3",
     "superagent": "^1.6.1"
   },
