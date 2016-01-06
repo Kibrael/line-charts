@@ -29,6 +29,8 @@ String.prototype.capitalizeFirstLetter = function() {
   return pieces.join(" ");
 }
 
+get('data/banks.json', fillBanks);
+
 function createChart(urlParts) {
   inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetter();
   inputType.value = urlParts.params.type;
@@ -85,6 +87,13 @@ function jsonCallback(response) {
   }
 }
 
+function fillBanks(response) {
+  var json = JSON.parse(response.text);
+  new Awesomplete(inputBank, {
+    list: json.financialInstitutionNames
+  });
+}
+
 // toggles set the hash to use the 4 param router
 // defaults to 'count'
 var toggles = document.querySelectorAll('.js-toggle');
@@ -104,15 +113,12 @@ for (var i = 0; i < toggles.length; i++) {
 }
 
 // should build dynamically from json file
-var bankNames = [
+/*var bankNames = [
   'Quicken Loans',
   'First National Bank Alaska',
   'The Golden 1 Credit Union'
-];
+];*/
 
-new Awesomplete(inputBank, {
-  list: bankNames
-});
 // custom awesomplete event
 inputBank.addEventListener('awesomplete-selectcomplete', function() {
   removeClass('visually-hidden', containerLoanType);
