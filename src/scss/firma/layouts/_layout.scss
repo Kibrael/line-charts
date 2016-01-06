@@ -1,18 +1,25 @@
 .left {
-    float: left;
+  float: left;
 }
 .right {
-    float: right;
+  float: right;
 }
 
+.none {
+  display: none;
+}
 .block {
-    display: block;
+  display: block;
 }
 .inline {
-    display: inline;
+  display: inline;
 }
 .inline-block {
-    display: inline-block;
+  display: inline-block;
+}
+
+.visibility-hidden {
+  visibility: hidden;
 }
 
 .visually-hidden {

@@ -17,7 +17,8 @@ var inputType = document.getElementById('loan-type');
 var inputLocation = document.getElementById('bank-location');
 var containerLoanType = document.getElementById('container-loan-type');
 var containerLocation = document.getElementById('container-bank-location');
-var pathParts = [];
+var containerToggles = document.getElementById('container-toggles');
+var containerHeading = document.getElementById('container-heading');
 
 String.prototype.capitalizeFirstLetter = function() {
   var pieces = this.split(" ");
@@ -33,13 +34,15 @@ function createChart(urlParts) {
   inputType.value = urlParts.params.type;
   inputLocation.value = urlParts.params.location.toUpperCase();
 
-  pathParts = [];
+  var pathParts = [];
   pathParts.push(urlParts.params.bank);
   pathParts.push(urlParts.params.type);
   pathParts.push(urlParts.params.location);
 
   removeClass('visually-hidden', containerLoanType);
   removeClass('visually-hidden', containerLocation);
+  removeClass('visibility-hidden', containerHeading);
+  removeClass('visually-hidden', containerToggles);
 
   get(buildURL(pathParts), jsonCallback);
 }
@@ -48,10 +51,12 @@ router.get(':bank/:type/:location', function(req) {
   createChart(req);
 });
 
+// route for toggles
 router.get(':bank/:type/:location/:data', function(req) {
+  // use currentData if it's available, user has been using the tool
   if (currentData) {
     line(currentData, req.params.data);
-  } else {
+  } else { // allow URLs to be shared
     createChart(req);
   }
 });
@@ -67,20 +72,32 @@ var currentData;
 function jsonCallback(response) {
   if (check(response.statusCode)) {
     var json = JSON.parse(response.text);
+    // saved to use for toggles
+    // don't need to reload json on a toggle
     currentData = json;
     line(json);
     headings(json);
   } else {
-    console.log(response.statusCode);
+    addClass('visually-hidden', containerToggles);
+    addClass('visibility-hidden', containerHeading);
+    document.getElementById('chart').innerHTML = '<h3>Sorry, we couldn\'t find that data.</h3>';
   }
 }
 
+// toggles set the hash to use the 4 param router
+// defaults to 'count'
 var toggles = document.querySelectorAll('.js-toggle');
 for (var i = 0; i < toggles.length; i++) {
   toggles[i].addEventListener('click', function(e) {
     removeAll('.js-toggle', 'active');
     addClass('active', this);
-    location.hash = inputBank.value.replace(/ /g, '-').toLowerCase() + '/' + inputType.value.replace(/ /g, '-').toLowerCase() + '/' + inputLocation.value.replace(/ /g, '-').toLowerCase() + '/' + this.getAttribute('data-data');
+    location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
+      + '/'
+      + inputType.value.replace(/ /g, '-').toLowerCase()
+      + '/'
+      + inputLocation.value.replace(/ /g, '-').toLowerCase()
+      + '/'
+      + this.getAttribute('data-data');
     e.preventDefault();
   });
 }
@@ -109,11 +126,19 @@ inputBank.addEventListener('keydown', function() {
 inputType.addEventListener('change', function() {
   // if a location is already chosen we can set the hash
   if (inputLocation.selectedIndex !== 0) {
-    location.hash = inputBank.value.replace(/ /g, '-').toLowerCase() + '/' + inputType.value.replace(/ /g, '-').toLowerCase() + '/' + inputLocation.value.replace(/ /g, '-').toLowerCase();
+    location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
+      + '/'
+      + inputType.value.replace(/ /g, '-').toLowerCase()
+      + '/'
+      + inputLocation.value.replace(/ /g, '-').toLowerCase();
   }
   removeClass('visually-hidden', containerLocation);
 });
 
 inputLocation.addEventListener('change', function() {
-  location.hash = inputBank.value.replace(/ /g, '-').toLowerCase() + '/' + inputType.value.replace(/ /g, '-').toLowerCase() + '/' + inputLocation.value.replace(/ /g, '-').toLowerCase();
+  location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
+    + '/'
+    + inputType.value.replace(/ /g, '-').toLowerCase()
+    + '/'
+    + inputLocation.value.replace(/ /g, '-').toLowerCase();
 });
