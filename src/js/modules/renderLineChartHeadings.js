@@ -1,8 +1,8 @@
-function renderLineChartHeadings(json) {
+function renderLineChartHeadings(name, type, location) {
   var title = document.getElementById('chart-title');
   var desc = document.getElementById('chart-desc');
-  title.innerText = json.bank;
-  desc.innerText = json.description;
+  title.innerText = name;
+  desc.innerText = type + ' loans in ' + location;
 }
 
 module.exports = renderLineChartHeadings;

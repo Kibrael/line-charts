@@ -44,6 +44,8 @@ function createChart(urlParts) {
   removeClass('visibility-hidden', containerHeading);
   removeClass('visually-hidden', containerToggles);
 
+  headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetter(), inputLocation.value);
+
   get(buildURL(pathParts), jsonCallback);
 }
 
@@ -76,7 +78,6 @@ function jsonCallback(response) {
     // don't need to reload json on a toggle
     currentData = json;
     line(json);
-    headings(json);
   } else {
     addClass('visually-hidden', containerToggles);
     addClass('visibility-hidden', containerHeading);
