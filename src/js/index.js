@@ -1,13 +1,14 @@
 var get = require ('./modules/getJSON');
 var check = require ('./modules/checkStatusCode');
 var line = require('./modules/renderLineChart');
-//var toggle = require('./modules/toggleChart');
 var headings = require('./modules/renderLineChartHeadings');
 var removeClass = require('./modules/removeClass');
 var removeAll = require('./modules/removeClassAll');
 var addClass = require('./modules/addClass');
 var buildURL = require('./modules/buildURL');
+
 require('awesomplete');
+
 var Grapnel = require('grapnel');
 var router = new Grapnel();
 
@@ -40,7 +41,7 @@ function createChart(urlParts) {
   removeClass('visually-hidden', containerLoanType);
   removeClass('visually-hidden', containerLocation);
 
-  get(buildURL(pathParts), testing);
+  get(buildURL(pathParts), jsonCallback);
 }
 
 router.get(':bank/:type/:location', function(req) {
@@ -58,12 +59,12 @@ router.get(':bank/:type/:location/:data', function(req) {
 // the default view
 // should decide on showing something more relevant
 router.get('', function(req) {
-  get('data/bank/type/state/data.json', testing);
+  get('data/bank/type/state/data.json', jsonCallback);
 });
 
 var currentData;
 
-function testing(response) {
+function jsonCallback(response) {
   if (check(response.statusCode)) {
     var json = JSON.parse(response.text);
     currentData = json;
@@ -77,7 +78,6 @@ function testing(response) {
 var toggles = document.querySelectorAll('.js-toggle');
 for (var i = 0; i < toggles.length; i++) {
   toggles[i].addEventListener('click', function(e) {
-    //console.log(currentData);
     removeAll('.js-toggle', 'active');
     addClass('active', this);
     location.hash = inputBank.value.replace(/ /g, '-').toLowerCase() + '/' + inputType.value.replace(/ /g, '-').toLowerCase() + '/' + inputLocation.value.replace(/ /g, '-').toLowerCase() + '/' + this.getAttribute('data-data');
