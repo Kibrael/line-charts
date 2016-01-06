@@ -1,7 +1,7 @@
 var get = require ('./modules/getJSON');
 var check = require ('./modules/checkStatusCode');
 var line = require('./modules/renderLineChart');
-var toggle = require('./modules/toggleChart');
+//var toggle = require('./modules/toggleChart');
 var headings = require('./modules/renderLineChartHeadings');
 var removeClass = require('./modules/removeClass');
 var removeAll = require('./modules/removeClassAll');
@@ -20,47 +20,38 @@ var pathParts = [];
 
 String.prototype.capitalizeFirstLetter = function() {
   var pieces = this.split(" ");
-  for ( var i = 0; i < pieces.length; i++ )
-  {
-      var j = pieces[i].charAt(0).toUpperCase();
-      pieces[i] = j + pieces[i].substr(1);
+  for (var i = 0; i < pieces.length; i++) {
+    var j = pieces[i].charAt(0).toUpperCase();
+    pieces[i] = j + pieces[i].substr(1);
   }
   return pieces.join(" ");
 }
 
-router.get(':bank/:type/:location', function(req) {
-  inputBank.value = req.params.bank.replace(/-/g, ' ').capitalizeFirstLetter();
-  inputType.value = req.params.type;
-  inputLocation.value = req.params.location.toUpperCase();
+function createChart(urlParts) {
+  inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetter();
+  inputType.value = urlParts.params.type;
+  inputLocation.value = urlParts.params.location.toUpperCase();
 
   pathParts = [];
-  pathParts.push(req.params.bank);
-  pathParts.push(req.params.type);
-  pathParts.push(req.params.location);
+  pathParts.push(urlParts.params.bank);
+  pathParts.push(urlParts.params.type);
+  pathParts.push(urlParts.params.location);
 
   removeClass('visually-hidden', containerLoanType);
   removeClass('visually-hidden', containerLocation);
 
   get(buildURL(pathParts), testing);
+}
+
+router.get(':bank/:type/:location', function(req) {
+  createChart(req);
 });
 
 router.get(':bank/:type/:location/:data', function(req) {
   if (currentData) {
     line(currentData, req.params.data);
   } else {
-    inputBank.value = req.params.bank.replace(/-/g, ' ').capitalizeFirstLetter();
-    inputType.value = req.params.type;
-    inputLocation.value = req.params.location.toUpperCase();
-
-    pathParts = [];
-    pathParts.push(req.params.bank);
-    pathParts.push(req.params.type);
-    pathParts.push(req.params.location);
-
-    removeClass('visually-hidden', containerLoanType);
-    removeClass('visually-hidden', containerLocation);
-
-    get(buildURL(pathParts), testing);
+    createChart(req);
   }
 });
 
@@ -104,11 +95,11 @@ var bankNames = [
 new Awesomplete(inputBank, {
   list: bankNames
 });
+// custom awesomplete event
 inputBank.addEventListener('awesomplete-selectcomplete', function() {
   removeClass('visually-hidden', containerLoanType);
-
-  //location.hash = inputBank.value.replace(/ /g, '-').toLowerCase();
 });
+// new bank picked, reset loan type and location selects and hide location
 inputBank.addEventListener('keydown', function() {
   inputType.selectedIndex = 0;
   inputLocation.selectedIndex = 0;
@@ -116,20 +107,11 @@ inputBank.addEventListener('keydown', function() {
 });
 
 inputType.addEventListener('change', function() {
+  // if a location is already chosen we can set the hash
   if (inputLocation.selectedIndex !== 0) {
-    pathParts = [];
-    var bankName = inputBank.value;
-    var bankType = inputType.value;
-    var bankLocation = inputLocation.value;
-
-    pathParts.push(bankName);
-    pathParts.push(bankType);
-    pathParts.push(bankLocation);
-    get(buildURL(pathParts), testing);
     location.hash = inputBank.value.replace(/ /g, '-').toLowerCase() + '/' + inputType.value.replace(/ /g, '-').toLowerCase() + '/' + inputLocation.value.replace(/ /g, '-').toLowerCase();
   }
   removeClass('visually-hidden', containerLocation);
-  //location.hash = '/' + inputBank.value.replace(/ /g, '-').toLowerCase() + '/' + inputType.value.replace(/ /g, '-').toLowerCase();
 });
 
 inputLocation.addEventListener('change', function() {
