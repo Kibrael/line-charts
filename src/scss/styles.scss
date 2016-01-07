@@ -26,6 +26,10 @@
 
 @import 'firma/alignments';
 
+#chart {
+  max-width: 100%;
+}
 .c3 svg {
-  font-family: "AvenirNextLTW01-Regular", Arial, sans-serif;
+  font-family: "AvenirNextLTW01-Medium", Arial, sans-serif;
+  font-size: .75em;
 }

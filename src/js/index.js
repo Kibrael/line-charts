@@ -20,6 +20,8 @@ var containerLocation = document.getElementById('container-bank-location');
 var containerToggles = document.getElementById('container-toggles');
 var containerHeading = document.getElementById('container-heading');
 
+var chartData;
+
 String.prototype.capitalizeFirstLetter = function() {
   var pieces = this.split(" ");
   for (var i = 0; i < pieces.length; i++) {
@@ -35,6 +37,7 @@ function createChart(urlParts) {
   inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetter();
   inputType.value = urlParts.params.type;
   inputLocation.value = urlParts.params.location.toUpperCase();
+  chartData = urlParts.params.data;
 
   var pathParts = [];
   pathParts.push(urlParts.params.bank);
@@ -52,14 +55,11 @@ function createChart(urlParts) {
 }
 
 router.get(':bank/:type/:location', function(req) {
-  console.log('router 3 ' + inputLocation.value);
   createChart(req);
-  console.log('router 3 2nd time ' + inputLocation.value);
 });
 
 // route for toggles
 router.get(':bank/:type/:location/:data', function(req) {
-  console.log('router 4 ' + inputLocation.value);
   // use currentData if it's available, user has been using the tool
   if (currentData) {
     line(currentData, req.params.data);
@@ -84,7 +84,7 @@ function jsonCallback(response) {
     // saved to use for toggles
     // don't need to reload json on a toggle
     currentData = json;
-    line(json);
+    line(json, chartData);
   } else {
     addClass('visually-hidden', containerToggles);
     addClass('visibility-hidden', containerHeading);
