@@ -37,8 +37,7 @@ and (min-width: $med-min * 1px) {
 }
 
 @media only screen
-and (min-width: $large-min * 1px)
-and (max-width: $x-large-min * 1px) {
+and (min-width: $large-min * 1px) {
     @for $i from 1 to $columns-large + 1 {
       .#{$column-large-prefix}-#{$i} {
         width: percentage($i/$columns-large);
