@@ -52,17 +52,22 @@ function createChart(urlParts) {
 }
 
 router.get(':bank/:type/:location', function(req) {
+  console.log('router 3 ' + inputLocation.value);
   createChart(req);
+  console.log('router 3 2nd time ' + inputLocation.value);
 });
 
 // route for toggles
 router.get(':bank/:type/:location/:data', function(req) {
+  console.log('router 4 ' + inputLocation.value);
   // use currentData if it's available, user has been using the tool
   if (currentData) {
     line(currentData, req.params.data);
   } else { // allow URLs to be shared
     createChart(req);
   }
+
+  console.log('router 4 2nd time' + inputLocation.value);
 });
 
 // the default view
@@ -101,6 +106,7 @@ for (var i = 0; i < toggles.length; i++) {
   toggles[i].addEventListener('click', function(e) {
     removeAll('.js-toggle', 'active');
     addClass('active', this);
+    console.log('toggle ' + inputLocation.value);
     location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
       + '/'
       + inputType.value.replace(/ /g, '-').toLowerCase()
@@ -143,6 +149,7 @@ inputType.addEventListener('change', function() {
 });
 
 inputLocation.addEventListener('change', function() {
+  console.log(inputLocation.value);
   location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
     + '/'
     + inputType.value.replace(/ /g, '-').toLowerCase()
