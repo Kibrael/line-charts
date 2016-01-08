@@ -1,5 +1,5 @@
 require('jasmine-ajax');
-var getJSON = require ('../src/js/modules/getJSON');
+var getJSON = require ('../src/js/getJSON');
 
 var response = {
   response: {

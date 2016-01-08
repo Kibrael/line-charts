@@ -1,5 +1,5 @@
 require('jasmine-jquery');
-var headings = require ('../src/js/modules/renderLineChartHeadings');
+var headings = require ('../src/js/renderLineChartHeadings');
 
 describe('rendering chart headings', function() {
   beforeEach(function() {

@@ -1,5 +1,5 @@
 require('jasmine-jquery');
-var remove = require ('../src/js/modules/removeClassAll');
+var remove = require ('../src/js/removeClassAll');
 
 describe('removing a class from all', function() {
   var toggles;

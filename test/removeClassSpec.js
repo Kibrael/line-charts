@@ -1,5 +1,5 @@
 require('jasmine-jquery');
-var remove = require ('../src/js/modules/removeClass');
+var remove = require ('../src/js/removeClass');
 
 describe('removing a class', function() {
   var removeFrom;
@@ -9,7 +9,7 @@ describe('removing a class', function() {
     removeFrom = document.getElementById('remove');
     remove('active', removeFrom);
   });
-  
+
   it('should not have class .active', function() {
     expect(removeFrom).not.toHaveClass('active');
   });

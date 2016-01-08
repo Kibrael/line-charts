@@ -1,4 +1,4 @@
-var check = require ('../src/js/modules/checkStatusCode');
+var check = require ('../src/js/checkStatusCode');
 
 describe('checking status code', function() {
   it('200 = true', function() {

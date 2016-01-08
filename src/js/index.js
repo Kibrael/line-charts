@@ -1,11 +1,11 @@
-var get = require ('./modules/getJSON');
-var check = require ('./modules/checkStatusCode');
-var line = require('./modules/renderLineChart');
-var headings = require('./modules/renderLineChartHeadings');
-var removeClass = require('./modules/removeClass');
-var removeAll = require('./modules/removeClassAll');
-var addClass = require('./modules/addClass');
-var buildURL = require('./modules/buildURL');
+var get = require ('./getJSON');
+var check = require ('./checkStatusCode');
+var line = require('./renderLineChart');
+var headings = require('./renderLineChartHeadings');
+var removeClass = require('./removeClass');
+var removeAll = require('./removeClassAll');
+var addClass = require('./addClass');
+var buildURL = require('./buildURL');
 
 require('awesomplete');
 
@@ -22,7 +22,7 @@ var containerHeading = document.getElementById('container-heading');
 
 var chartData;
 
-String.prototype.capitalizeFirstLetter = function() {
+String.prototype.capitalizeFirstLetters = function() {
   var pieces = this.split(" ");
   for (var i = 0; i < pieces.length; i++) {
     var j = pieces[i].charAt(0).toUpperCase();
@@ -34,7 +34,7 @@ String.prototype.capitalizeFirstLetter = function() {
 get('data/banks.json', fillBanks);
 
 function createChart(urlParts) {
-  inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetter();
+  inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetters();
   inputType.value = urlParts.params.type;
   inputLocation.value = urlParts.params.location.toUpperCase();
   chartData = urlParts.params.data;
@@ -49,7 +49,7 @@ function createChart(urlParts) {
   removeClass('visibility-hidden', containerHeading);
   removeClass('visually-hidden', containerToggles);
 
-  headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetter(), inputLocation.value);
+  headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetters(), inputLocation.value);
 
   get(buildURL(pathParts), jsonCallback);
 }
@@ -66,8 +66,6 @@ router.get(':bank/:type/:location/:data', function(req) {
   } else { // allow URLs to be shared
     createChart(req);
   }
-
-  console.log('router 4 2nd time' + inputLocation.value);
 });
 
 // the default view
@@ -106,7 +104,6 @@ for (var i = 0; i < toggles.length; i++) {
   toggles[i].addEventListener('click', function(e) {
     removeAll('.js-toggle', 'active');
     addClass('active', this);
-    console.log('toggle ' + inputLocation.value);
     location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
       + '/'
       + inputType.value.replace(/ /g, '-').toLowerCase()
@@ -117,13 +114,6 @@ for (var i = 0; i < toggles.length; i++) {
     e.preventDefault();
   });
 }
-
-// should build dynamically from json file
-/*var bankNames = [
-  'Quicken Loans',
-  'First National Bank Alaska',
-  'The Golden 1 Credit Union'
-];*/
 
 // custom awesomplete event
 inputBank.addEventListener('awesomplete-selectcomplete', function() {
@@ -137,6 +127,7 @@ inputBank.addEventListener('keydown', function() {
 });
 
 inputType.addEventListener('change', function() {
+  removeClass('visually-hidden', containerLocation);
   // if a location is already chosen we can set the hash
   if (inputLocation.selectedIndex !== 0) {
     location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
@@ -145,11 +136,9 @@ inputType.addEventListener('change', function() {
       + '/'
       + inputLocation.value.replace(/ /g, '-').toLowerCase();
   }
-  removeClass('visually-hidden', containerLocation);
 });
 
 inputLocation.addEventListener('change', function() {
-  console.log(inputLocation.value);
   location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
     + '/'
     + inputType.value.replace(/ /g, '-').toLowerCase()

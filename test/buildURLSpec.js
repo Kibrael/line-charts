@@ -1,4 +1,4 @@
-var buildURL = require ('../src/js/modules/buildURL');
+var buildURL = require ('../src/js/buildURL');
 
 describe('removing a class', function() {
   jasmine.getFixtures().fixturesPath = 'test/fixtures';

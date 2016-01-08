@@ -1,5 +1,5 @@
 require('jasmine-jquery');
-var addClass = require ('../src/js/modules/addClass');
+var addClass = require ('../src/js/addClass');
 
 describe('adding a class', function() {
   beforeEach(function() {

@@ -1,5 +1,5 @@
 require('jasmine-jquery');
-var line = require ('../src/js/modules/renderLineChart');
+var line = require ('../src/js/renderLineChart');
 
 var json = {
   title: "Bank HMDA filings",
