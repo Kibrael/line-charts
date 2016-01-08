@@ -8,6 +8,7 @@ var addClass = require('./addClass');
 var buildURL = require('./buildURL');
 
 require('awesomplete');
+require('./utils/capitalizeFirstLetters');
 
 var Grapnel = require('grapnel');
 var router = new Grapnel();
@@ -21,15 +22,6 @@ var containerToggles = document.getElementById('container-toggles');
 var containerHeading = document.getElementById('container-heading');
 
 var chartData;
-
-String.prototype.capitalizeFirstLetters = function() {
-  var pieces = this.split(" ");
-  for (var i = 0; i < pieces.length; i++) {
-    var j = pieces[i].charAt(0).toUpperCase();
-    pieces[i] = j + pieces[i].substr(1);
-  }
-  return pieces.join(" ");
-}
 
 get('data/banks.json', fillBanks);
 
