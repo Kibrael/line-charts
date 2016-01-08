@@ -9,6 +9,10 @@ var buildURL = require('./buildURL');
 
 require('awesomplete');
 require('./utils/capitalizeFirstLetters');
+require('./eventListeners/inputBank');
+require('./eventListeners/inputType');
+require('./eventListeners/inputLocation');
+require('./eventListeners/chartToggles');
 
 var Grapnel = require('grapnel');
 var router = new Grapnel();
@@ -21,15 +25,41 @@ var containerLocation = document.getElementById('container-bank-location');
 var containerToggles = document.getElementById('container-toggles');
 var containerHeading = document.getElementById('container-heading');
 
-var chartData;
+var chartType;
+var currentData;
 
-get('data/banks.json', fillBanks);
+window.callbacks = {};
+
+callbacks.jsonCallback = function(response) {
+  if (check(response.statusCode)) {
+    var json = JSON.parse(response.text);
+    // saved to use for toggles
+    // don't need to reload json on a toggle
+    currentData = json;
+    line(json, chartType);
+  } else {
+    addClass('visually-hidden', containerToggles);
+    addClass('visibility-hidden', containerHeading);
+    document.getElementById('chart').innerHTML = '<h3>Sorry, we couldn\'t find that data.</h3>';
+  }
+}
+
+callbacks.fillBanks = function(response) {
+  var json = JSON.parse(response.text);
+  new Awesomplete(inputBank, {
+    list: json.financialInstitutionNames
+  });
+}
 
 function createChart(urlParts) {
+  // set input values in case of a shared URL
   inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetters();
   inputType.value = urlParts.params.type;
   inputLocation.value = urlParts.params.location.toUpperCase();
-  chartData = urlParts.params.data;
+
+  // save the type of chart (eg count or loan_amount)
+  // for use in callback, tells which one to render
+  chartType = urlParts.params.data;
 
   var pathParts = [];
   pathParts.push(urlParts.params.bank);
@@ -43,7 +73,7 @@ function createChart(urlParts) {
 
   headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetters(), inputLocation.value);
 
-  get(buildURL(pathParts), jsonCallback);
+  get(buildURL(pathParts), callbacks.jsonCallback);
 }
 
 router.get(':bank/:type/:location', function(req) {
@@ -63,77 +93,7 @@ router.get(':bank/:type/:location/:data', function(req) {
 // the default view
 // should decide on showing something more relevant
 router.get('', function(req) {
-  get('data/bank/type/state/data.json', jsonCallback);
+  get('data/bank/type/state/data.json', callbacks.jsonCallback);
 });
 
-var currentData;
-
-function jsonCallback(response) {
-  if (check(response.statusCode)) {
-    var json = JSON.parse(response.text);
-    // saved to use for toggles
-    // don't need to reload json on a toggle
-    currentData = json;
-    line(json, chartData);
-  } else {
-    addClass('visually-hidden', containerToggles);
-    addClass('visibility-hidden', containerHeading);
-    document.getElementById('chart').innerHTML = '<h3>Sorry, we couldn\'t find that data.</h3>';
-  }
-}
-
-function fillBanks(response) {
-  var json = JSON.parse(response.text);
-  new Awesomplete(inputBank, {
-    list: json.financialInstitutionNames
-  });
-}
-
-// toggles set the hash to use the 4 param router
-// defaults to 'count'
-var toggles = document.querySelectorAll('.js-toggle');
-for (var i = 0; i < toggles.length; i++) {
-  toggles[i].addEventListener('click', function(e) {
-    removeAll('.js-toggle', 'active');
-    addClass('active', this);
-    location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
-      + '/'
-      + inputType.value.replace(/ /g, '-').toLowerCase()
-      + '/'
-      + inputLocation.value.replace(/ /g, '-').toLowerCase()
-      + '/'
-      + this.getAttribute('data-data');
-    e.preventDefault();
-  });
-}
-
-// custom awesomplete event
-inputBank.addEventListener('awesomplete-selectcomplete', function() {
-  removeClass('visually-hidden', containerLoanType);
-});
-// new bank picked, reset loan type and location selects and hide location
-inputBank.addEventListener('keydown', function() {
-  inputType.selectedIndex = 0;
-  inputLocation.selectedIndex = 0;
-  addClass('visually-hidden', containerLocation);
-});
-
-inputType.addEventListener('change', function() {
-  removeClass('visually-hidden', containerLocation);
-  // if a location is already chosen we can set the hash
-  if (inputLocation.selectedIndex !== 0) {
-    location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
-      + '/'
-      + inputType.value.replace(/ /g, '-').toLowerCase()
-      + '/'
-      + inputLocation.value.replace(/ /g, '-').toLowerCase();
-  }
-});
-
-inputLocation.addEventListener('change', function() {
-  location.hash = inputBank.value.replace(/ /g, '-').toLowerCase()
-    + '/'
-    + inputType.value.replace(/ /g, '-').toLowerCase()
-    + '/'
-    + inputLocation.value.replace(/ /g, '-').toLowerCase();
-});
+get('data/banks.json', callbacks.fillBanks);
