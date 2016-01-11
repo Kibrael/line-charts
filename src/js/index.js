@@ -96,4 +96,4 @@ router.get('', function(req) {
   get('data/bank/type/state/data.json', callbacks.jsonCallback);
 });
 
-get('data/banks.json', callbacks.fillBanks);
+get('data/fi.json', callbacks.fillBanks);
