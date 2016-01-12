@@ -13,7 +13,11 @@ module.exports = {
         dest: 'dist/',
         expand: true,
         flatten: true
-      },
+      }
+    ]
+  },
+  data: {
+    files: [
       {
         cwd: 'src/',
         src: ['data/**/*'],

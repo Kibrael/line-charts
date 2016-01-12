@@ -11,6 +11,14 @@ module.exports = {
         files: 'src/*.html',
         tasks: ['copy:dev']
     },
+    specs: {
+      files: 'test/*Spec.js',
+      tasks: ['browserify:specs', 'jasmine:dev']
+    },
+    json: {
+      files: 'src/data/**/*.json',
+      tasks: ['copy:data']
+    },
     livereload: {
         options: {
             livereload: '<%= connect.options.livereload %>'
@@ -20,13 +28,5 @@ module.exports = {
             'dist/*.html',
             'dist/js/*.js'
         ]
-    },
-    specs: {
-      files: 'test/*Spec.js',
-      tasks: ['browserify:specs', 'jasmine:dev']
-    },
-    json: {
-      files: 'src/data/**/*.json',
-      tasks: ['copy:dev']
     }
 }

@@ -3,7 +3,7 @@ var c3 = require('c3');
 function setYLabel(key) {
   var label = 'Count';
   if (key === 'loan_amount') {
-    label = 'Loan Amount';
+    label = 'Application amount in thousands';
   }
 
   return label;
@@ -42,9 +42,14 @@ function renderChart(json, value) {
         }
       },
       y: {
+        min: 0,
         label: {
           position: 'outer-middle',
           text: setYLabel(value)
+        },
+        tick: {
+          format: function (d) { return d.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+          }
         }
       }
     },
