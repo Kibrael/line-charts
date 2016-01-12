@@ -9,7 +9,7 @@ var containerLoanType = document.getElementById('container-loan-type');
 
 // custom awesomplete event
 inputBank.addEventListener('awesomplete-selectcomplete', function() {
-  removeClass('visually-hidden', containerLoanType);
+  location.hash = inputBank.value.replace(/ /g, '-').toLowerCase();
 });
 // new bank picked, reset loan type and location selects and hide location
 inputBank.addEventListener('keydown', function() {

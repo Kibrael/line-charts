@@ -51,11 +51,53 @@ callbacks.fillBanks = function(response) {
   });
 }
 
+callbacks.fillLocations = function(response) {
+  // remove existing options
+  inputLocation.innerHTML = '';
+
+  var urlHash = location.hash.split('/');
+  var locationHash = urlHash[2];
+
+  var option = document.createElement('option');
+  option.text = 'Choose a location';
+  option.value = 'choose';
+  inputLocation.add(option);
+
+  var option2 = document.createElement('option');
+  option2.text = 'Nationwide';
+  option2.value = 'nationwide';
+  if (locationHash === 'nationwide') {
+    option2.selected = true;
+  }
+  inputLocation.add(option2);
+
+  if (check(response.statusCode)) {
+    var json = JSON.parse(response.text);
+    for (var i = 0; i < json.states.length; i++) {
+      var option = document.createElement('option');
+      option.text = json.states[i];
+      option.value = json.states[i];
+      if (locationHash === json.states[i]) {
+        option.selected = true;
+      }
+      inputLocation.add(option);
+    }
+  } else {
+    console.log('dont got it');
+  }
+
+  if (urlHash[2]) {
+    inputLocation.value = urlHash[2];
+  } else {
+    inputLocation.value = 'choose';
+  }
+}
+
 function createChart(urlParts) {
   // set input values in case of a shared URL
   inputBank.value = urlParts.params.bank.replace(/-/g, ' ').capitalizeFirstLetters();
   inputType.value = urlParts.params.type;
-  inputLocation.value = urlParts.params.location.toUpperCase();
+  inputLocation.value = urlParts.params.location;
 
   // save the type of chart (eg count or loan_amount)
   // for use in callback, tells which one to render
@@ -71,13 +113,32 @@ function createChart(urlParts) {
   removeClass('visibility-hidden', containerHeading);
   removeClass('visually-hidden', containerToggles);
 
-  headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetters(), inputLocation.options[inputLocation.selectedIndex].text);
-
   get(buildURL(pathParts), callbacks.jsonCallback);
 }
 
+router.get(':bank', function(req) {
+  inputBank.value = req.params.bank.replace(/-/g, ' ').capitalizeFirstLetters();
+  // TODO: get data for types and fill the types dropdown
+  removeClass('visually-hidden', containerLoanType);
+});
+
+router.get(':bank/:type', function(req) {
+  inputBank.value = req.params.bank.replace(/-/g, ' ').capitalizeFirstLetters();
+  inputType.value = req.params.type;
+  removeClass('visually-hidden', containerLoanType);
+  removeClass('visually-hidden', containerLocation);
+  get('data/' + req.params.bank + '/' + req.params.type + '/statewide/locations.json', callbacks.fillLocations);
+});
+
 router.get(':bank/:type/:location', function(req) {
+  if (inputLocation.options.length === 0) {
+    get('data/' + req.params.bank + '/' + req.params.type + '/statewide/locations.json', callbacks.fillLocations);
+  } else {
+    inputLocation.value = req.params.location;
+  }
+
   createChart(req);
+  headings(req.params.bank.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.type.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.location);
 });
 
 // route for toggles
@@ -93,7 +154,7 @@ router.get(':bank/:type/:location/:data', function(req) {
 // the default view
 // should decide on showing something more relevant
 router.get('', function(req) {
-  get('data/bank/type/state/data.json', callbacks.jsonCallback);
+  get('data/all/All/nationwide/data.json', callbacks.jsonCallback);
 });
 
 get('data/fi.json', callbacks.fillBanks);

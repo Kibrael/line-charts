@@ -3,7 +3,7 @@ function renderLineChartHeadings(name, type, location) {
   var desc = document.getElementById('chart-desc');
   title.innerText = name;
   var descText = type + ' applications ';
-  if (location !== 'Nationwide') {
+  if (location !== 'nationwide') {
     descText = descText + 'in '
   }
   descText = descText + location;
