@@ -71,7 +71,7 @@ function createChart(urlParts) {
   removeClass('visibility-hidden', containerHeading);
   removeClass('visually-hidden', containerToggles);
 
-  headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetters(), inputLocation.value);
+  headings(inputBank.value, inputType.value.replace(/-/g, ' ').capitalizeFirstLetters(), inputLocation.options[inputLocation.selectedIndex].text);
 
   get(buildURL(pathParts), callbacks.jsonCallback);
 }
