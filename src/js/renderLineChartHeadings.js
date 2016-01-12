@@ -2,7 +2,7 @@ function renderLineChartHeadings(name, type, location) {
   var title = document.getElementById('chart-title');
   var desc = document.getElementById('chart-desc');
   title.innerText = name;
-  var descText = type + ' loans ';
+  var descText = type + ' applications ';
   if (location !== 'Nationwide') {
     descText = descText + 'in '
   }

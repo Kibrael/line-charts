@@ -10,6 +10,6 @@ describe('rendering chart headings', function() {
     expect(document.getElementById('chart-title')).not.toBeEmpty();
     expect(document.getElementById('chart-title')).toHaveText('Bank Name');
     expect(document.getElementById('chart-desc')).not.toBeEmpty();
-    expect(document.getElementById('chart-desc')).toHaveText('Single Family loans in AK');
+    expect(document.getElementById('chart-desc')).toHaveText('Single Family applications in AK');
   });
 });
