@@ -75,15 +75,13 @@ callbacks.fillLocations = function(response) {
     var json = JSON.parse(response.text);
     for (var i = 0; i < json.states.length; i++) {
       var option = document.createElement('option');
-      option.text = json.states[i];
+      option.text = json.states[i].toUpperCase();
       option.value = json.states[i];
       if (locationHash === json.states[i]) {
         option.selected = true;
       }
       inputLocation.add(option);
     }
-  } else {
-    console.log('dont got it');
   }
 
   if (urlHash[2]) {
@@ -147,14 +145,20 @@ router.get(':bank/:type/:location/:data', function(req) {
   if (currentData) {
     line(currentData, req.params.data);
   } else { // allow URLs to be shared
+    if (inputLocation.options.length === 0) {
+      get('data/' + req.params.bank + '/' + req.params.type + '/statewide/locations.json', callbacks.fillLocations);
+    } else {
+      inputLocation.value = req.params.location;
+    }
     createChart(req);
+    headings(req.params.bank.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.type.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.location);
   }
 });
 
 // the default view
 // should decide on showing something more relevant
 router.get('', function(req) {
-  get('data/all/All/nationwide/data.json', callbacks.jsonCallback);
+  //get('data/all/All/nationwide/data.json', callbacks.jsonCallback);
 });
 
 get('data/fi.json', callbacks.fillBanks);

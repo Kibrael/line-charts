@@ -1,13 +1,19 @@
+require('./utils/capitalizeFirstLetters');
+
 function renderLineChartHeadings(name, type, location) {
-  var title = document.getElementById('chart-title');
-  var desc = document.getElementById('chart-desc');
-  title.innerText = name;
-  var descText = type + ' applications ';
-  if (location !== 'nationwide') {
-    descText = descText + 'in '
+  var chartBank = document.getElementById('chart-bank');
+  var chartType = document.getElementById('chart-type');
+  var chartLocation = document.getElementById('chart-location');
+
+  chartBank.innerText = name;
+  chartType.innerText = type;
+
+  if (location === 'nationwide') {
+    location = 'Nationwide'
+  } else {
+    location = location.toUpperCase();
   }
-  descText = descText + location;
-  desc.innerText = descText;
+  chartLocation.innerText = location;
 }
 
 module.exports = renderLineChartHeadings;

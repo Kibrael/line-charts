@@ -21,3 +21,12 @@ em {
   font-size: ($h3-font-size/$font-size)*1em;
   margin-top: (30/$font-size)*1em;
 }
+
+.small {
+  font-size: .75em;
+}
+
+hr {
+  border-top: none;
+  border-bottom: 1px solid $gray-50;
+}
