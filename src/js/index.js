@@ -17,13 +17,14 @@ require('./eventListeners/chartToggles');
 var Grapnel = require('grapnel');
 var router = new Grapnel();
 
+var chart = document.getElementById('chart');
 var inputBank = document.getElementById('bank-name');
 var inputType = document.getElementById('loan-type');
 var inputLocation = document.getElementById('bank-location');
 var containerLoanType = document.getElementById('container-loan-type');
 var containerLocation = document.getElementById('container-bank-location');
 var containerToggles = document.getElementById('container-toggles');
-var containerHeading = document.getElementById('container-heading');
+var containerMeta = document.getElementById('container-metadata');
 
 var chartType;
 var currentData;
@@ -35,11 +36,12 @@ callbacks.jsonCallback = function(response) {
     var json = JSON.parse(response.text);
     // saved to use for toggles
     // don't need to reload json on a toggle
+    removeClass('visually-hidden', chart);
     currentData = json;
     line(json, chartType);
   } else {
     addClass('visually-hidden', containerToggles);
-    addClass('visibility-hidden', containerHeading);
+    addClass('visually-hidden', containerMeta);
     document.getElementById('chart').innerHTML = '<h3>Sorry, we couldn\'t find that data.</h3>';
   }
 }
@@ -108,7 +110,7 @@ function createChart(urlParts) {
 
   removeClass('visually-hidden', containerLoanType);
   removeClass('visually-hidden', containerLocation);
-  removeClass('visibility-hidden', containerHeading);
+  removeClass('visually-hidden', containerMeta);
   removeClass('visually-hidden', containerToggles);
 
   get(buildURL(pathParts), callbacks.jsonCallback);
