@@ -21,6 +21,9 @@ function renderChart(json, value) {
 
   c3.generate({
     bindto: '#chart',
+    padding: {
+      right: 20
+    },
     data: {
       type: json.type,
       json: json.data.years,
