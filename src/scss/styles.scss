@@ -32,7 +32,78 @@
 #chart {
   max-width: 100%;
 }
-.c3 svg {
-  font-family: "AvenirNextLTW01-Medium", Arial, sans-serif;
-  font-size: .75em;
+.c3 {
+  svg {
+    font-family: "AvenirNextLTW01-Medium", Arial, sans-serif;
+    font-size: .75em;
+  }
+  .tick {
+    color: $white;
+    background-color: $white;
+
+  }
+  text {
+    color: $white;
+    background-color: $white;
+    fill: $white;
+  }
+  path,
+  line {
+    stroke: $white;
+  }
+  .c3-line {
+    stroke-width: 3px;
+  }
+  .c3-circle {
+    stroke: $white;
+    stroke-width: 3px;
+  }
+  .c3-circle._expanded_ {
+    stroke: $black;
+    stroke-width: 3px;
+  }
+  .c3-axis-y,
+  .c3-axis-x {
+    .domain {
+      stroke: none;
+    }
+    .tick line {
+      stroke: none;
+    }
+  }
+  .c3-ygrid, .c3-xgrids {
+    opacity: .4;
+  }
+  .c3-tooltip {
+    color: $white;
+
+    tr:first-child {
+      display: none;
+    }
+    tr:nth-child(2) td:first-child {
+      display: none;
+    }
+    tbody tr {
+      border: none;
+    }
+    td {
+      background-color: $black;
+      border-left: none;
+      font-family: "AvenirNextLTW01-Demi";
+      font-size: 1em;
+    }
+  }
+}
+
+tbody tr,
+td {
+  border: none;
+}
+
+h1 {
+  font-family: "AvenirNextLTW01-Demi";
+}
+
+a {
+  color: $white;
 }

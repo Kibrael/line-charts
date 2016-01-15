@@ -39,5 +39,9 @@ textarea {
 }
 
 select {
-  border: 1px solid $gray;
+  background-color: $white;
+  border: 0;
+  border-radius: 0;
+  height: 38px;
+  outline: 1px solid $gray
 }

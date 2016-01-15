@@ -11,7 +11,7 @@ function setYLabel(key) {
 
 function setColors(value) {
   var colors = {};
-  colors[value] = '#2CB34A';
+  colors[value] = '#FFFFFF';
 
   return colors;
 }
@@ -22,10 +22,11 @@ function renderChart(json, value) {
   c3.generate({
     bindto: '#chart',
     padding: {
-      right: 20
+      top: 10,
+      right: 15,
     },
     data: {
-      type: json.type,
+      type: 'area',
       json: json.data.years,
       colors: setColors(value),
       keys: {
@@ -33,14 +34,30 @@ function renderChart(json, value) {
         value: [value]
       }
     },
+    grid: {
+      /*x: {
+        show: true
+      },*/
+      y: {
+        show: true
+      }
+    },
     axis: {
       x: {
+        padding: {
+          left: .1,
+          right: .1
+        },
         label: {
           position: 'outer-center',
           text: 'Year'
         }
       },
       y: {
+        padding: {
+          top: 10,
+          bottom: 0
+        },
         min: 0,
         label: {
           position: 'outer-middle',
