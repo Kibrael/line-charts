@@ -13,6 +13,7 @@ require('./eventListeners/inputBank');
 require('./eventListeners/inputType');
 require('./eventListeners/inputLocation');
 require('./eventListeners/chartToggles');
+require('./eventListeners/keydown');
 
 var Grapnel = require('grapnel');
 var router = new Grapnel();

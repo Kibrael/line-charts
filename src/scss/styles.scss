@@ -59,7 +59,7 @@
     stroke-width: 3px;
   }
   .c3-circle._expanded_ {
-    stroke: $black;
+    stroke: $green;
     stroke-width: 3px;
   }
   .c3-axis-y,
@@ -87,7 +87,7 @@
       border: none;
     }
     td {
-      background-color: $black;
+      background-color: $green;
       border-left: none;
       font-family: "AvenirNextLTW01-Demi";
       font-size: 1em;
@@ -100,7 +100,7 @@ td {
   border: none;
 }
 
-h1 {
+h1, h3 {
   font-family: "AvenirNextLTW01-Demi";
 }
 
