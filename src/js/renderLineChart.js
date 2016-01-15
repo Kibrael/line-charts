@@ -19,9 +19,6 @@ function setColors(value) {
 function renderChart(json, value) {
   value = typeof value !== 'undefined' ? value : 'count';
   if (chart) {
-    console.log('test');
-    console.log(json.data.years);
-    console.log(value);
     chart.load({
       json: json.data.years,
       keys: {
@@ -41,7 +38,6 @@ function renderChart(json, value) {
       unload: true
     });
   } else {
-    console.log(json.data.years);
     chart = c3.generate({
       bindto: '#chart',
       transition: {

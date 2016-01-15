@@ -144,9 +144,19 @@ router.get(':bank/:type/:location', function(req) {
 
 // route for toggles
 router.get(':bank/:type/:location/:data', function(req) {
-  // use currentData if it's available, user has been using the tool
+  if (inputLocation.options.length === 0) {
+    get('data/' + req.params.bank + '/' + req.params.type + '/statewide/locations.json', callbacks.fillLocations);
+  } else {
+    inputLocation.value = req.params.location;
+  }
+
+  createChart(req);
+  headings(req.params.bank.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.type.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.location);
+  /*// use currentData if it's available, user has been using the tool
   if (currentData) {
     line(currentData, req.params.data);
+    inputType.value = req.params.type;
+    inputLocation.value = req.params.location;
   } else { // allow URLs to be shared
     if (inputLocation.options.length === 0) {
       get('data/' + req.params.bank + '/' + req.params.type + '/statewide/locations.json', callbacks.fillLocations);
@@ -155,7 +165,7 @@ router.get(':bank/:type/:location/:data', function(req) {
     }
     createChart(req);
     headings(req.params.bank.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.type.replace(/-/g, ' ').capitalizeFirstLetters(), req.params.location);
-  }
+  }*/
 });
 
 // the default view
