@@ -52,14 +52,14 @@
     stroke: $white;
   }
   .c3-line {
-    stroke-width: 3px;
+    stroke-width: 2px;
   }
   .c3-circle {
     stroke: $white;
-    stroke-width: 3px;
+    stroke-width: 2px;
   }
   .c3-circle._expanded_ {
-    stroke: $green;
+    stroke: $white;
     stroke-width: 3px;
   }
   .c3-axis-y,
@@ -75,7 +75,11 @@
     opacity: .4;
   }
   .c3-tooltip {
-    color: $white;
+    background: $black;
+    box-shadow: none;
+    color: $gold-80;
+
+    opacity: 1;
 
     tr:first-child {
       display: none;
@@ -87,7 +91,7 @@
       border: none;
     }
     td {
-      background-color: $green;
+      background-color: transparent;
       border-left: none;
       font-family: "AvenirNextLTW01-Demi";
       font-size: 1em;
@@ -102,6 +106,9 @@ td {
 
 h1, h3 {
   font-family: "AvenirNextLTW01-Demi";
+}
+h6 {
+  color: $gold-80;
 }
 
 a {

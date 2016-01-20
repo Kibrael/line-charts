@@ -11,12 +11,13 @@ function setYLabel(key) {
 
 function setColors(value) {
   var colors = {};
-  colors[value] = '#FFFFFF';
+  colors[value] = '#FFB149';
 
   return colors;
 }
 
 function renderChart(json, value) {
+  console.log(value);
   value = typeof value !== 'undefined' ? value : 'count';
   if (chart) {
     chart.load({
@@ -26,16 +27,10 @@ function renderChart(json, value) {
         value: [value]
       },
       colors: setColors(value),
-      /*data: {
-        type: 'area',
-        json: json.data.years,
-        colors: setColors(value),
-        keys: {
-          x: 'year',
-          value: [value]
-        }
-      }*/
       unload: true
+    });
+    chart.axis.labels({
+      y: setYLabel(value)
     });
   } else {
     chart = c3.generate({
@@ -48,7 +43,7 @@ function renderChart(json, value) {
         right: 15,
       },
       data: {
-        type: 'area',
+        type: 'line',
         json: json.data.years,
         colors: setColors(value),
         keys: {

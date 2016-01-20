@@ -33,6 +33,7 @@ var currentData;
 window.callbacks = {};
 
 callbacks.jsonCallback = function(response) {
+  console.log(chartType);
   if (check(response.statusCode)) {
     var json = JSON.parse(response.text);
     // saved to use for toggles
